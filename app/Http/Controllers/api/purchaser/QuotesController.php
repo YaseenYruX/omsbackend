@@ -32,4 +32,19 @@ class QuotesController extends Controller
     		return response()->json(['status'=>1]);
     	}
     }
+
+    public function multiitemquote(Request $request, Quotes_item $quotes_item)
+    {
+       $quotes_item->prices()->delete();
+        foreach ($request->purchaser as $items) {
+            $purchaser = new Quotes_purchaser_price();
+            $purchaser->qty = $items['qty'];
+            $purchaser->price = $items['price'];
+            $purchaser->supplier_name = $items['supplier_name'];
+            $purchaser->quotes_item_id = $quotes_item->id;
+            $purchaser->save();
+            
+        }
+        return response()->json(['status'=>1]);
+    }
 }
