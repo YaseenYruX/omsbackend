@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\QuotesController;
 use App\Http\Controllers\Api\BrandsController;
+use App\Http\Controllers\Api\QuotesitemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +46,8 @@ Route::name('quotes.')->prefix('quotes')->middleware('cors')->group(function () 
 });
 
 Route::name('quotes-item.')->prefix('quotesitem')->middleware('cors')->group(function () {
-	Route::get('/', [Quotes_item::class, 'index'])->name('list');
-	Route::post('/create-update/{quotes?}', [Quotes_item::class, 'create_or_update'])->name('createupdate');
-	Route::get('/delete/{quotes}', [Quotes_item::class, 'delete'])->name('delete');
-	Route::get('/get/{quotes}', [Quotes_item::class, 'get'])->name('get');
+	Route::get('/', [QuotesitemController::class, 'index'])->name('list');
+	Route::post('/create-update/{quotes?}', [QuotesitemController::class, 'create_or_update'])->name('createupdate');
+	Route::get('/delete/{quotes}', [QuotesitemController::class, 'delete'])->name('delete');
+	Route::get('/get/{quotes}', [QuotesitemController::class, 'get'])->name('get');
 });

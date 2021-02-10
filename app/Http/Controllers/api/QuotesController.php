@@ -45,7 +45,8 @@ class QuotesController extends Controller
         Quotes_item::where('quotes_id',$id)->delete();
         return response()->json(['status'=>1]);
     }
-    public function get(Quotes $quotes){
+    public function get($id){
+        $quotes=Quotes::with('items')->findOrFail($id);
     	return $quotes;
     }
 }

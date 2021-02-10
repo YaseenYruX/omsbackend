@@ -14,7 +14,7 @@ class QuotesitemController extends Controller
         $perpage=!empty($_GET['perpage'])?intval($_GET['perpage']):20;
         $sortcol=!empty($_GET['sortcol'])?$_GET['sortcol']:'id';
         $sorttype=!empty($_GET['sorttype'])?$_GET['sorttype']:'desc';
-    	return Quotes::orderBy($sortcol,$sorttype)->paginate($perpage);
+    	return Quotes_item::orderBy($sortcol,$sorttype)->paginate($perpage);
     }
     public function create_or_update(Request $request,Quotes_item $quotes_item){
    
