@@ -34,8 +34,4 @@ class BrandsController extends Controller
     public function get(Brands $brands){
     	return $brands;
     }
-    public function fileurl($filepath){
-        $url = asset('storage/brands/'.$filepath);
-        return response()->json(['url'=>$url]);
-    }
 }
