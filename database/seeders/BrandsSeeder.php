@@ -19,8 +19,6 @@ class BrandsSeeder extends Seeder
         DB::table('brands')->insert([
             'name' => Str::random(10),
             'image'=>Str::random(3).'.png',
-            // 'email' => Str::random(10).'@gmail.com',
-            // 'password' => Hash::make('password'),
         ]);
     }
 }
