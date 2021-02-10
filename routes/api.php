@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\QuotesController;
 use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\QuotesitemController;
+use App\Http\Controllers\Api\purchaser\QuotesController as PurchaserQuotesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +51,8 @@ Route::name('quotes-item.')->prefix('quotesitem')->middleware('cors')->group(fun
 	Route::post('/create-update/{quotes?}', [QuotesitemController::class, 'create_or_update'])->name('createupdate');
 	Route::get('/delete/{quotes}', [QuotesitemController::class, 'delete'])->name('delete');
 	Route::get('/get/{quotes}', [QuotesitemController::class, 'get'])->name('get');
+});
+
+Route::name('purchaser.')->prefix('purchaser')->middleware('cors')->group(function () {
+	Route::get('/unanswered', [PurchaserQuotesController::class, 'unanswered'])->name('unanswered');
 });
