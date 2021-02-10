@@ -13,13 +13,24 @@ class QuotesController extends Controller
     	return Quotes::orderBy($sortcol,$sorttype)->paginate($perpage);
     }
     public function create_or_update(Request $request,Quotes $quotes){
+        
     	$quotes->firstname=$request->firstname;
     	$quotes->lastname=$request->lastname;
     	$quotes->email=$request->email;
     	$quotes->website=$request->website;
     	$quotes->qoute_status=$request->qoute_status;
     	if($quotes->save()){
-    		return response()->json(['status'=>1,'id'=>$quotes->id()]);
+            $quotes_item = new Quotes_item;
+            foreach ($request->items as $item) {
+                $quotes_item->item=$item['item'];
+                $quotes_item->sku=$item['sku'];
+                $quotes_item->qty=$item['qty'];
+                $quotes_item->price=$item['price'];
+                $quotes_item->total=$item['total'];
+                $quotes_item->quotes_id=$quotes->id;
+                $quotes_item->save();    
+            }
+    		return response()->json(['status'=>1,'id'=>$quotes->id]);
     	}
     	else{
     		return response()->json(['status'=>0]);
