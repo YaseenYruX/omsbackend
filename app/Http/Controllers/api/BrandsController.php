@@ -3,6 +3,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brands;
+use Illuminate\Support\Facades\Storage;
 class BrandsController extends Controller
 {
 	public function index(){
@@ -28,5 +29,9 @@ class BrandsController extends Controller
     }
     public function get(Brands $brands){
     	return $brands;
+    }
+    public function fileurl($filepath){
+        $url = asset('storage/brands/'.$filepath);
+        return response()->json(['url'=>$url]);
     }
 }
