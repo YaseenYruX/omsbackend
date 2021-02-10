@@ -55,4 +55,5 @@ Route::name('quotes-item.')->prefix('quotesitem')->middleware('cors')->group(fun
 
 Route::name('purchaser.')->prefix('purchaser')->middleware('cors')->group(function () {
 	Route::get('/unanswered', [PurchaserQuotesController::class, 'unanswered'])->name('unanswered');
+	Route::post('/quote/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'itemquote'])->name('itemquote');
 });

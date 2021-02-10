@@ -12,9 +12,4 @@ class AddQuoteIdToQuotesItem extends Migration
             $table->integer('quotes_id');
         });
     }
-    public function down()
-    {
-        Schema::table('quotes_item', function (Blueprint $table) {
-        });
-    }
 }

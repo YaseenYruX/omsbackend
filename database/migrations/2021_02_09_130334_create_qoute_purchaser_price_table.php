@@ -13,18 +13,7 @@ class CreateQoutePurchaserPriceTable extends Migration
      */
     public function up()
     {
-        Schema::create('qoute_purchaser_price', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('firstname',255);
-            $table->string('lastname',255);
-            $table->string('fullname',255)->virtualAs('concat(firstname," ",lastname)');
-            $table->string('email',255);
-            $table->string('website',255);
-            // $table->unsignedBigInteger('item_id');
-            // $table->foreign('item_id')->references('id')->on('qoutes_item');
-            $table->foreignId('item_id')->constrained('users');
-            $table->timestamps();
-        });
+        Schema::dropIfExists('qoute_purchaser_price');
     }
 
     /**
