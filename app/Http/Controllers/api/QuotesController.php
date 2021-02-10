@@ -30,7 +30,6 @@ class QuotesController extends Controller
                 $quotes_item->sku=$item['sku'];
                 $quotes_item->qty=$item['qty'];
                 $quotes_item->price=$item['price'];
-                $quotes_item->total=$item['total'];
                 $quotes_item->quotes_id=$quotes->id;
                 $quotes_item->save();    
             }
@@ -46,7 +45,7 @@ class QuotesController extends Controller
         Quotes_item::where('quotes_id',$id)->delete();
         return response()->json(['status'=>1]);
     }
-    public function get(Lead $quotes){
-    	return $qoutes;
+    public function get(Quotes $quotes){
+    	return $quotes;
     }
 }

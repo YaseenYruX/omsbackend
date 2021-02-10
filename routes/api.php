@@ -43,3 +43,10 @@ Route::name('quotes.')->prefix('quotes')->middleware('cors')->group(function () 
 	Route::get('/delete/{quotes}', [QuotesController::class, 'delete'])->name('delete');
 	Route::get('/get/{quotes}', [QuotesController::class, 'get'])->name('get');
 });
+
+Route::name('quotes-item.')->prefix('quotesitem')->middleware('cors')->group(function () {
+	Route::get('/', [Quotes_item::class, 'index'])->name('list');
+	Route::post('/create-update/{quotes?}', [Quotes_item::class, 'create_or_update'])->name('createupdate');
+	Route::get('/delete/{quotes}', [Quotes_item::class, 'delete'])->name('delete');
+	Route::get('/get/{quotes}', [Quotes_item::class, 'get'])->name('get');
+});

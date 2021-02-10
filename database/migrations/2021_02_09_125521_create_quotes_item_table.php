@@ -16,10 +16,10 @@ class CreateQuotesItemTable extends Migration
         Schema::create('quotes_item', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('item',255);
-            $table->float('qty',255);
+            $table->integer('qty');
             $table->string('sku',255);
             $table->float('price',255);
-            $table->float('total',255);
+            $table->float('total',255)->virtualAs('qty*price');
             $table->timestamps();
         });
     }
