@@ -13,14 +13,24 @@ class CreateSupplierTable extends Migration
      */
     public function up()
     {
-        Schema::create('supplier', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('firstname',255);
-            $table->string('lastname',255);
-            $table->string('fullname',255)->virtualAs('concat(firstname," ",lastname)');
-            $table->string('email',255);
-            $table->timestamps();
-        });
+        // Schema::create('supplier', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->string('owner',255);
+        //     $table->string('fullname',255);
+        //     $table->string('email',255);
+        //     $table->string('phone',255);
+        //     $table->string('website',255);
+        //     $table->enum('gl_account',['Sales-Software','Sales-Hardware','Rental-Home','Interest Income','Sales Software Support','Sales Other','Inteerest Sales','Labor Hardware Service']);
+        //     $table->string('category',255);
+        //     $table->string('street',255);
+        //     $table->string('city',255);
+        //     $table->string('state',255);
+        //     $table->string('zip_code',255);
+        //     $table->string('country',255);
+        //     $table->text('description');
+        //     $table->string('images');
+        //     $table->timestamps();
+        // });
     }
 
     /**

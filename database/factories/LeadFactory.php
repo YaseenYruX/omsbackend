@@ -24,11 +24,30 @@ class LeadFactory extends Factory
     {
         return [
             //
+            'owner'=> Str::random(10),
+            'title'=> Str::random(10),
             'firstname' => Str::random(10),
             'lastname'=>Str::random(10),
             'email' => Str::random(10).'@gmail.com',
-            'website' => Str::random(10).'.com',
-            'lead_tag' => 'BigFish',
+            'mobile'=> Str::random(10),
+            'website' => 'www'.Str::random(5).'.com',
+            'lead_source' => 'Advertisement',
+            'lead_status'=> 'Pre-Qualified',
+            'Industry'=>'ASP(Application Service Provider)',
+            'total_employees'=>10,
+            'annual_revenue'=>1000,
+            'ratings'=>'Active',
+            'skype_id'=>'',
+            'twitter'=>'@Test_twitter',
+            'secondary_email'=>'',
+            'street'=>Str::random(3).' Street',
+            'city'=>Str::random(3).' City',
+            'state'=>Str::random(2),
+            'zip_code'=>'12345',
+            'country'=>'Pakistan',
+            'description'=>Str::random(10),
+            'image'=>'dummy_image.png',
+
         ];
     }
 }
