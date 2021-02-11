@@ -22,8 +22,8 @@ class CreateLeadsTable extends Migration
             $table->integer('user_id');
             $table->string('title',255)->nullable(true);
             $table->string('company',255)->nullable(true);
-            $table->string('firstname',255);
-            $table->string('lastname',255)->nullable(true);
+            $table->string('firstname',255)->nullable(true);
+            $table->string('lastname',255);
             $table->string('fullname',255)->virtualAs('concat(firstname," ",lastname)');
             $table->string('email',255);
             $table->string('mobile',255)->nullable(true);
