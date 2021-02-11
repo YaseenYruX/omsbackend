@@ -2,27 +2,43 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\QuotesController;
 use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\QuotesitemController;
 use App\Http\Controllers\Api\purchaser\QuotesController as PurchaserQuotesController;
+use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+/*cu in routes mean it's for create and update*/
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+/*login route*/
+Route::name('authenticate.')->prefix('auth')->middleware('cors')->group(function () {
+	Route::post('/login', [AuthController::class, 'login'])->name('login');
+});
+/*login route end*/
+/*authenticated routes*/
+Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(function () {
+	Route::name('admin.')->prefix('admin')->middleware('admin')->group(function () {
+		Route::get('/users', [AdminUserController::class, 'index'])->name('users');
+		Route::get('/user/{user}', [AdminUserController::class, 'get'])->name('user.get');
+		Route::post('/user-cu/{user?}', [AdminUserController::class, 'cu'])->name('user.cu');
+		Route::delete('/user/{user}', [AdminUserController::class, 'delete'])->name('user.delete');
+	});
+	Route::name('buh.')->prefix('buh')->middleware('buh')->group(function () {
+		
+	});
+	Route::name('sales.')->prefix('sales')->middleware('sales')->group(function () {
+		
+	});
+	Route::name('purchaser.')->prefix('purchaser')->middleware('purchaser')->group(function () {
+		
+	});
+});
+/*authenticated routes end*/
 Route::name('leads.')->prefix('leads')->middleware('cors')->group(function () {
 	Route::get('/', [LeadController::class, 'index'])->name('list');
 	Route::post('/create-update/{lead?}', [LeadController::class, 'create_or_update'])->name('createupdate');
