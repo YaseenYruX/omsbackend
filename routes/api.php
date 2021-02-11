@@ -58,3 +58,9 @@ Route::name('purchaser.')->prefix('purchaser')->middleware('cors')->group(functi
 	Route::post('/quote/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'itemquote'])->name('itemquote');
 	Route::post('/multiquote/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'multiitemquote'])->name('itemquote');
 });
+
+Route::name('admin.')->prefix('admin')->middleware('cors')->group(function () {
+	Route::get('/login', [PurchaserQuotesController::class, 'login'])->name('login');
+	Route::post('/quote/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'itemquote'])->name('itemquote');
+	Route::post('/multiquote/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'multiitemquote'])->name('itemquote');
+});
