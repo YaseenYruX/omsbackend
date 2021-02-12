@@ -26,7 +26,7 @@ class UserCURequest extends FormRequest
         return [
             'name'=>'required|max:255',
             'user_type'=>'required|integer',
-            'password'=>'required|max:255',
+            'password'=>'required|max:255|min:8',
             'email'=>'required|max:255|email|unique:users',
         ];
     }
