@@ -31,6 +31,7 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 		Route::get('/users-summary',[AdminUserController::class,'user_summary'])->name('user.summary');
 		Route::name('lead.')->prefix('lead')->group(function () {
 			Route::get('/fetch-brands',[AdminLeadController::class,'fetchbrands'])->name('fetchbrands');
+			Route::get('/fetch-salesperson/{brandid?}',[AdminLeadController::class,'fetchsalesperson'])->name('fetchsalesperson');
 		});
 	});
 	Route::name('buh.')->prefix('buh')->middleware('buh')->group(function () {
