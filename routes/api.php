@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\QuotesitemController;
 use App\Http\Controllers\Api\purchaser\QuotesController as PurchaserQuotesController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Api\Admin\LeadController as AdminLeadController;
 
 /*cu in routes mean it's for create and update*/
 
@@ -28,6 +29,9 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 		Route::post('/user-cu/{user?}', [AdminUserController::class, 'cu'])->name('user.cu');
 		Route::delete('/user/{user}', [AdminUserController::class, 'delete'])->name('user.delete');
 		Route::get('/users-summary',[AdminUserController::class,'user_summary'])->name('user.summary');
+		Route::name('lead.')->prefix('lead')->group(function () {
+			Route::get('/fetch-brands',[AdminLeadController::class,'fetchbrands'])->name('fetchbrands');
+		});
 	});
 	Route::name('buh.')->prefix('buh')->middleware('buh')->group(function () {
 		
