@@ -35,4 +35,14 @@ class UserController extends Controller
 		$user->delete();
 		return response()->json(['status'=>1]);
 	}
+
+	public function user_summary()
+	{
+		$user[1] = User::where('user_type',1)->count();
+		$user[2] = User::where('user_type',2)->count();
+		$user[3] = User::where('user_type',3)->count();
+		$user[4] = User::where('user_type',4)->count();
+
+		return $user;
+	}
 }

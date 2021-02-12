@@ -27,6 +27,7 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 		Route::get('/user/{user}', [AdminUserController::class, 'get'])->name('user.get');
 		Route::post('/user-cu/{user?}', [AdminUserController::class, 'cu'])->name('user.cu');
 		Route::delete('/user/{user}', [AdminUserController::class, 'delete'])->name('user.delete');
+		Route::get('/users-summary',[AdminUserController::class,'user_summary'])->name('user.summary');
 	});
 	Route::name('buh.')->prefix('buh')->middleware('buh')->group(function () {
 		
