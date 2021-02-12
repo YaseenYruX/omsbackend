@@ -24,8 +24,12 @@ class LeadFactory extends Factory
     {
         return [
             //
-            'owner'=> Str::random(10),
+            'brand_id'=>1,
+            'assigned_id'=>1,
+            'lead_owner'=> 1,
+            'user_id'=>1,
             'title'=> Str::random(10),
+            'company'=>Str::random(10),
             'firstname' => Str::random(10),
             'lastname'=>Str::random(10),
             'email' => Str::random(10).'@gmail.com',
@@ -46,7 +50,7 @@ class LeadFactory extends Factory
             'zip_code'=>'12345',
             'country'=>'Pakistan',
             'description'=>Str::random(10),
-            'image'=>'dummy_image.png',
+            'image'=>'leads/dummy_image.png',
 
         ];
     }

@@ -11,7 +11,8 @@ class UserController extends Controller
     	$perpage=!empty($_GET['perpage'])?intval($_GET['perpage']):20;
         $sortcol=!empty($_GET['sortcol'])?$_GET['sortcol']:'id';
         $sorttype=!empty($_GET['sorttype'])?$_GET['sorttype']:'desc';
-        return User::orderBy($sortcol,$sorttype)->paginate($perpage);
+        $usertype=!empty($_GET['usertype'])?$_GET['usertype']:1;
+        return User::where('user_type',$usertype)->orderBy($sortcol,$sorttype)->paginate($perpage);
     }
 	public function get(User $user){
 		return $user;
