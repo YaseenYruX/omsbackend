@@ -23,7 +23,7 @@ class LeadController extends Controller
 
         $lead->brand_id=$request->brand_id;
         $lead->assigned_id=$request->assigned_id;
-        $lead->lead_owner=$request->lead_owner;
+        $lead->lead_owner=Auth::guard('api')->user()->id;
         $lead->user_id=Auth::guard('api')->user()->id;
         $lead->title=$request->title;
         $lead->company=$request->company;
