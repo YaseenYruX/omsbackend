@@ -16,7 +16,7 @@ class AuthController extends Controller
     				/*matched password*/
     				Auth::login($userfind);
     				if(Auth::check()){
-    					return response()->json(['status'=>1,'data'=>$userfind->api_token]);
+    					return response()->json(['status'=>1,'data'=>$userfind->api_token,'user'=>$userfind]);
     				}else{
     					return response()->json(['status'=>0,'data'=>'Login Failed']);
     				}
