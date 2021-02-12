@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 class BrandsController extends Controller
 {
 	public function index(){
+        dd('xyz');
         $perpage=!empty($_GET['perpage'])?intval($_GET['perpage']):20;
         dd('abc')
         $sortcol=!empty($_GET['sortcol'])?$_GET['sortcol']:'id';
