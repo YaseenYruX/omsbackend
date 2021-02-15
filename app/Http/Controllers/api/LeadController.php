@@ -15,8 +15,9 @@ class LeadController extends Controller
         return Lead::orderBy($sortcol,$sorttype)->paginate($perpage);
     }
     public function create_or_update(Request $request,Lead $lead){
+
         /* On update delete old image */
-        
+
         if(intval($lead->id)>0){
             Storage::delete($lead->image);}
             /* deleting ends*/
@@ -32,8 +33,9 @@ class LeadController extends Controller
     	$lead->email=$request->email;
         $lead->mobile=$request->mobile;
     	$lead->website=$request->website;
+        $lead->lead_source=$request->lead_source;
     	$lead->lead_status=$request->lead_status;
-        $lead->Industry=$request->Industry;
+        $lead->Industry=$request->industry;
         $lead->total_employees=$request->total_employees;
         $lead->annual_revenue=$request->annual_revenue;
         $lead->ratings=$request->ratings;
@@ -42,14 +44,18 @@ class LeadController extends Controller
         $lead->secondary_email=$request->secondary_email;
         $lead->street=$request->street;
         $lead->state=$request->state;
+        $lead->city=$request->city;
         $lead->zip_code=$request->zip_code;
         $lead->country=$request->country;
         $lead->currency=$request->currency;
         $lead->description=$request->description;
 
         //for image
-        $path = $request->file('image')->store('leads');
-        $lead->image=$path;
+        if($request->hasFile('image'))
+        {
+            $path = $request->file('image')->store('leads');
+            $lead->image=$path;
+        }
 
 
     	if($lead->save()){
@@ -64,6 +70,8 @@ class LeadController extends Controller
     	return response()->json(['status'=>1]);
     }
     public function get(Lead $lead){
-    	return $lead;
+        $leads=Lead::with('sales')->findOrFail($lead->id);
+        //return $quotes;
+    	return $leads;
     }
 }

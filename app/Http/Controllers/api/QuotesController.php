@@ -17,8 +17,19 @@ class QuotesController extends Controller
     	$quotes->firstname=$request->firstname;
     	$quotes->lastname=$request->lastname;
     	$quotes->email=$request->email;
-    	$quotes->website=$request->website;
-    	$quotes->qoute_status=$request->qoute_status;
+    	$quotes->owner=$request->owner;
+        $quotes->mobile=$request->mobile;
+        $quotes->lead_id=$request->lead_id;
+    	$quotes->company=$request->company;
+        $quotes->street=$request->street;
+        $quotes->city=$request->city;
+        $quotes->state=$request->state;
+        $quotes->zip_code=$request->zip_code;
+        $quotes->country=$request->country;
+        $quotes->currency=$request->currency;
+        $quotes->shipping=$request->shipping;
+        $quotes->vat=$request->vat;
+        $quotes->description=$request->description;
     	if($quotes->save()){
             foreach ($request->items as $item) {
                 if(isset($item['id'])&&intval($item['id'])>0){
@@ -30,7 +41,7 @@ class QuotesController extends Controller
                 $quotes_item->sku=$item['sku'];
                 $quotes_item->qty=$item['qty'];
                 $quotes_item->price=$item['price'];
-                $quotes_item->quotes_id=$quotes->id;
+                $quotes_item->quote_id=$quotes->id;
                 $quotes_item->save();    
             }
     		return response()->json(['status'=>1,'id'=>$quotes->id]);

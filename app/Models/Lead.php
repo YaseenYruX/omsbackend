@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Lead extends Model
 {
     use HasFactory;
 
-       protected $fillable = [
-        'firstname',
-        'lastname',
-        'email',
-        'lead_tag',
-    ];
+      public function sales()
+    {
+        return $this->hasOne(User::class, 'id', 'assigned_id');
+    }
 }

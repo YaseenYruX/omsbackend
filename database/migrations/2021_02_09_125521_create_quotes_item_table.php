@@ -15,6 +15,7 @@ class CreateQuotesItemTable extends Migration
     {
         Schema::create('quotes_item', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('quote_id');
             $table->foreignId('condition_id')->constrained('m_flag');
             $table->string('item',255);
             $table->integer('qty');
