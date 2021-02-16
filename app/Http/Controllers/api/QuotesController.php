@@ -57,7 +57,7 @@ class QuotesController extends Controller
         return response()->json(['status'=>1]);
     }
     public function get($id){
-        $quotes=Quotes::with('items','items.prices')->findOrFail($id);
+        $quotes=Quotes::with('items','items.prices','lead','lead.sales')->findOrFail($id);
     	return $quotes;
     }
 }
