@@ -9,7 +9,7 @@ use App\Models\Quotes_purchaser_price;
 class Quotes_item extends Model
 {
     use HasFactory;
-    protected $table='quotes_item';
+    protected $table='rfq_quotes_item';
 
     public function prices()
     {

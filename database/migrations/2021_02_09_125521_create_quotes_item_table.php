@@ -13,10 +13,10 @@ class CreateQuotesItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('quotes_item', function (Blueprint $table) {
+        Schema::create('rfq_quotes_item', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('quote_id');
-            $table->foreignId('condition_id')->constrained('m_flag');
+            $table->integer('condition_id');
             $table->string('item',255);
             $table->integer('qty');
             $table->string('sku',255);
@@ -33,6 +33,6 @@ class CreateQuotesItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotes_item');
+        Schema::dropIfExists('rfq_quotes_item');
     }
 }

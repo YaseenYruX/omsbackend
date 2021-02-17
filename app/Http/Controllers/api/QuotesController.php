@@ -30,6 +30,7 @@ class QuotesController extends Controller
         $quotes->shipping=$request->shipping;
         $quotes->vat=$request->vat;
         $quotes->description=$request->description;
+        $quotes->quote_status=$request->quote_status;
     	if($quotes->save()){
             foreach ($request->items as $item) {
                 if(isset($item['id'])&&intval($item['id'])>0){
@@ -39,6 +40,7 @@ class QuotesController extends Controller
                 }
                 $quotes_item->item=$item['item'];
                 $quotes_item->sku=$item['sku'];
+                $quotes_item->conditions=$item['conditions'];
                 $quotes_item->qty=$item['qty'];
                 $quotes_item->price=$item['price'];
                 $quotes_item->quote_id=$quotes->id;

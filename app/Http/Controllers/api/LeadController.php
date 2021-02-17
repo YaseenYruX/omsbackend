@@ -49,6 +49,7 @@ class LeadController extends Controller
         $lead->country=$request->country;
         $lead->currency=$request->currency;
         $lead->description=$request->description;
+        $lead->additional_details=$request->additional_details;
 
         //for image
         if($request->hasFile('image'))
