@@ -43,13 +43,13 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 	Route::name('sales.')->prefix('sales')->middleware('sales')->group(function () {
 
 
-			/* Sales Quotes handlong*/
+		/* Sales Quotes handlong*/
 		Route::name('quotes.')->prefix('quotes')->middleware('cors')->group(function () {
-		Route::get('/', [SalesQuotesController::class, 'index'])->name('list');
-		Route::post('/create-update/{quotes?}', [SalesQuotesController::class, 'create_or_update'])->name('createupdate');
-		Route::get('/delete/{quotes}', [SalesQuotesController::class, 'delete'])->name('delete');
-		Route::get('/get/{quotes}', [SalesQuotesController::class, 'get'])->name('get');
-	});
+			Route::get('/', [SalesQuotesController::class, 'index'])->name('list');
+			Route::post('/create-update/{quotes?}', [SalesQuotesController::class, 'create_or_update'])->name('createupdate');
+			Route::get('/delete/{quotes}', [SalesQuotesController::class, 'delete'])->name('delete');
+			Route::get('/get/{quotes}', [SalesQuotesController::class, 'get'])->name('get');
+		});
 		/* sales quotes handlong end*/
 
 		/*sales lead handlong*/
@@ -66,8 +66,14 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 
 
 	Route::name('purchaser.')->prefix('purchaser')->middleware('purchaser')->group(function () {
-		
+		Route::name('quotes.')->prefix('quotes')->middleware('cors')->group(function () {
+			Route::get('/unanswered', [PurchaserQuotesController::class, 'unanswered'])->name('unanswered');
+			Route::post('/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'itemquote'])->name('itemquote');
+			Route::post('/multi/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'multiitemquote'])->name('itemquote');
+			Route::get('/get/{quotes}', [QuotesController::class, 'get'])->name('get');
+		});
 	});
+
 });
 /*authenticated routes end*/
 Route::name('leads.')->prefix('leads')->middleware('cors')->group(function () {
