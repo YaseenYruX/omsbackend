@@ -45,6 +45,7 @@ class CreateLeadsTable extends Migration
             $table->string('currency',3)->nullable(true);
             $table->text('description')->nullable(true);
             $table->text('additional_details')->nullable(true);
+            $table->string('lead_time',255)->nullable(true);
             $table->string('image',255)->nullable(true);
             $table->timestamps();
         });

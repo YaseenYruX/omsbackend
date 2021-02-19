@@ -7,9 +7,12 @@ use App\Http\Controllers\Api\LeadController;
 use App\Http\Controllers\Api\QuotesController;
 use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\QuotesitemController;
+use App\Http\Controllers\Api\M_flagController;
 use App\Http\Controllers\Api\purchaser\QuotesController as PurchaserQuotesController;
 use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Api\Admin\LeadController as AdminLeadController;
+use App\Http\Controllers\Api\Sales\LeadController as SalesLeadController;
+use App\Http\Controllers\Api\Sales\QuotesController as SalesQuotesController;
 
 /*cu in routes mean it's for create and update*/
 
@@ -38,8 +41,30 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 		
 	});
 	Route::name('sales.')->prefix('sales')->middleware('sales')->group(function () {
+
+
+			/* Sales Quotes handlong*/
+		Route::name('quotes.')->prefix('quotes')->middleware('cors')->group(function () {
+		Route::get('/', [SalesQuotesController::class, 'index'])->name('list');
+		Route::post('/create-update/{quotes?}', [SalesQuotesController::class, 'create_or_update'])->name('createupdate');
+		Route::get('/delete/{quotes}', [SalesQuotesController::class, 'delete'])->name('delete');
+		Route::get('/get/{quotes}', [SalesQuotesController::class, 'get'])->name('get');
+	});
+		/* sales quotes handlong end*/
+
+		/*sales lead handlong*/
+		Route::name('leads.')->prefix('leads')->middleware('cors')->group(function () {
+			Route::get('/', [SalesLeadController::class, 'index'])->name('list');
+			Route::get('/brands', [SalesLeadController::class, 'getbrands'])->name('brands');
+			Route::post('/create-update/{lead?}', [SalesLeadController::class, 'create_or_update'])->name('createupdate');
+			Route::get('/delete/{lead}', [SalesLeadController::class, 'delete'])->name('delete');
+			Route::get('/get/{lead}', [SalesLeadController::class, 'get'])->name('get');
+		});
+		/*sales lead handlong end*/
 		
 	});
+
+
 	Route::name('purchaser.')->prefix('purchaser')->middleware('purchaser')->group(function () {
 		
 	});
@@ -79,6 +104,10 @@ Route::name('purchaser.')->prefix('purchaser')->middleware('cors')->group(functi
 	Route::get('/unanswered', [PurchaserQuotesController::class, 'unanswered'])->name('unanswered');
 	Route::post('/quote/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'itemquote'])->name('itemquote');
 	Route::post('/multiquote/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'multiitemquote'])->name('itemquote');
+});
+
+Route::name('m_flag.')->prefix('mflag')->middleware('cors')->group(function () {
+	Route::get('/conditions', [M_flagController::class, 'conditions'])->name('conditions');
 });
 
 Route::name('admin.')->prefix('admin')->middleware('cors')->group(function () {

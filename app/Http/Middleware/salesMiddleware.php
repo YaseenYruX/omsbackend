@@ -10,6 +10,6 @@ class salesMiddleware
         	$response = $next($request);
         	return $response;
         }
-        return response()->json(['status'=>0,'data','Authenticate as Sales person']);
+        return response()->json(['status'=>0,'data'=>'Authenticate as Sales person']);
     }
 }

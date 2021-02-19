@@ -1,23 +1,24 @@
 <?php
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\api\Sales;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quotes;
 use App\Models\Quotes_item;
+use Auth;
 class QuotesController extends Controller
 {
     public function index(){
         $perpage=!empty($_GET['perpage'])?intval($_GET['perpage']):20;
         $sortcol=!empty($_GET['sortcol'])?$_GET['sortcol']:'id';
         $sorttype=!empty($_GET['sorttype'])?$_GET['sorttype']:'desc';
-    	return Quotes::orderBy($sortcol,$sorttype)->paginate($perpage);
+    	return Quotes::where('owner',Auth::guard('api')->user()->id)->orderBy($sortcol,$sorttype)->paginate($perpage);
     }
     public function create_or_update(Request $request,Quotes $quotes){
-   
+
     	$quotes->firstname=$request->firstname;
     	$quotes->lastname=$request->lastname;
     	$quotes->email=$request->email;
-    	$quotes->owner=$request->owner;
+    	$quotes->owner=Auth::guard('api')->user()->id;
         $quotes->mobile=$request->mobile;
         $quotes->lead_id=$request->lead_id;
     	$quotes->company=$request->company;
@@ -27,8 +28,8 @@ class QuotesController extends Controller
         $quotes->zip_code=$request->zip_code;
         $quotes->country=$request->country;
         $quotes->currency=$request->currency;
-        $quotes->shipping=$request->shipping;
-        $quotes->vat=$request->vat;
+        $quotes->shipping=($request->shipping==null)?$request->shipping:0;
+        $quotes->vat=($request->vat==null)?$request->vat:0;
         $quotes->description=$request->description;
         $quotes->quote_status=$request->quote_status;
     	if($quotes->save()){
@@ -57,7 +58,7 @@ class QuotesController extends Controller
     public function delete(Quotes $quotes){
         $id = $quotes->id;
     	$response = $quotes->delete();
-        Quotes_item::where('quotes_id',$id)->delete();
+        Quotes_item::where('quote_id',$id)->delete();
         return response()->json(['status'=>1]);
     }
     public function get($id){

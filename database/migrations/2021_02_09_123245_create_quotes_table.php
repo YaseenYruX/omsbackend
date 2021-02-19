@@ -34,6 +34,7 @@ class CreateQuotesTable extends Migration
             $table->float('shipping',10,2)->nullable(true);
             $table->float('vat',10,2)->nullable(true);
             $table->text('description')->nullable(true);
+            $table->text('additional_details')->nullable(true);
             $table->integer('quote_status');
             $table->string('image',255)->nullable(true);
             

@@ -16,7 +16,9 @@ class CreateQuotesItemTable extends Migration
         Schema::create('rfq_quotes_item', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('quote_id');
-            $table->integer('condition_id');
+            $table->integer('brand');
+            $table->integer('conditions');
+            $table->text('description');
             $table->string('item',255);
             $table->integer('qty');
             $table->string('sku',255);

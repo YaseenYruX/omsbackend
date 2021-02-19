@@ -10,6 +10,6 @@ class buhMiddleware
         	$response = $next($request);
         	return $response;
         }
-        return response()->json(['status'=>0,'data','Authenticate as an BUH']);
+        return response()->json(['status'=>0,'data'=>'Authenticate as an BUH']);
     }
 }
