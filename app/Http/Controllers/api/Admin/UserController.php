@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\UserCURequest;
 use App\Models\User;
+use App\Models\UserBrands;
 use Hash;
 class UserController extends Controller
 {
@@ -25,6 +26,17 @@ class UserController extends Controller
 		$user->user_type=$req->user_type;
 		if($user->save()){
 			$user->api_token=md5($user->id.$req->email.$req->password.$req->user_type);
+			if($req->user_type!==1)
+			{
+				$arr=[];
+				foreach ($req->brands as $value) {
+					$arr[]=[
+						'brand_id'=>$value,
+						'user_id'=>$user->id
+					];
+				}
+				$usercreate=count($arr)>0?UserBrands::insert($arr):false;
+			}
 			$user->save();
 			return response()->json(['status'=>1]);
 		}else{
