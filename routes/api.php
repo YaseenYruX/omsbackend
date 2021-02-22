@@ -70,7 +70,9 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 			Route::get('/unanswered', [PurchaserQuotesController::class, 'unanswered'])->name('unanswered');
 			Route::post('/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'itemquote'])->name('itemquote');
 			Route::post('/multi/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'multiitemquote'])->name('itemquote');
-			Route::get('/get/{quotes}', [QuotesController::class, 'get'])->name('get');
+			Route::get('/get/{quotes}', [PurchaserQuotesController::class, 'getquotes'])->name('get');
+			Route::get('/brands', [PurchaserQuotesController::class, 'getbrands'])->name('brands');
+			Route::get('/conditions', [PurchaserQuotesController::class, 'conditions'])->name('conditions');
 		});
 	});
 

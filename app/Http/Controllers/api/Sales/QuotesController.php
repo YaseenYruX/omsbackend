@@ -28,6 +28,8 @@ class QuotesController extends Controller
         $quotes->zip_code=$request->zip_code;
         $quotes->country=$request->country;
         $quotes->currency=$request->currency;
+        $quotes->lead_time = $request->lead_time;
+        $quotes->additional_details= $request->additional_details;
         $quotes->shipping=($request->shipping==null)?$request->shipping:0;
         $quotes->vat=($request->vat==null)?$request->vat:0;
         $quotes->description=$request->description;
