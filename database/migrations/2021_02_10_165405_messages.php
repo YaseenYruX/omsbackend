@@ -30,6 +30,6 @@ class Messages extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('quotes_purchaser_price');
+        Schema::dropIfExists('messages');
     }
 }

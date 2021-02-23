@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quotes;
 use App\Models\Quotes_item;
+use App\Models\Purchaser_quote;
+use App\Models\User;
 class QuotesController extends Controller
 {
     public function index(){
@@ -32,6 +34,18 @@ class QuotesController extends Controller
         $quotes->description=$request->description;
         $quotes->quote_status=$request->quote_status;
     	if($quotes->save()){
+            $user = User::where('user_type',4)->get();
+            foreach ($user as $users) 
+            {
+                $purchaser_quote = new Purchaser_quote;
+                $purchaser_quote->quote_id = $quotes->id;
+                $purchaser_quote->purchaser_id= $users->id;
+                $purchaser_quote->lead_time = $request->lead_time;
+                $purchaser_quote->shipping = 0;
+                $purchaser_quote->additional_details = $request->additional_details;
+                $purchaser_quote->status = 0;
+                $purchaser_quote->save();
+            }
             foreach ($request->items as $item) {
                 if(isset($item['id'])&&intval($item['id'])>0){
                     $quotes_item = Quotes_item::find($item['id']);

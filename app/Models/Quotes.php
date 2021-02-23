@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Quotes_item;
 use App\Models\Lead;
+use App\Models\Purchaser_quote;
 
 class Quotes extends Model
 {
@@ -25,5 +26,9 @@ class Quotes extends Model
     public function lead()
     {
         return $this->hasOne(Lead::class,'id','lead_id');
+    }
+    public function purchaser()
+    {
+        return $this->hasOne(Purchaser_quote::class,'quote_id','id');
     }
 }
