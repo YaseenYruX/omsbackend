@@ -48,7 +48,7 @@ class QuotesController extends Controller
        $p->lead_time= $request->lead_time;
        $p->purchaser_id= Auth::guard('api')->user()->id;
        $p->status=1;
-       $p->save();
+       $p->save(); 
         foreach ($request->purchaser as $items) {
             $purchaser = new Quotes_purchaser_price();
             $purchaser->qty = $items['qty'];
