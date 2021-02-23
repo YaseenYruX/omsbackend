@@ -27,8 +27,5 @@ class Quotes extends Model
     {
         return $this->hasOne(Lead::class,'id','lead_id');
     }
-    public function purchaser()
-    {
-        return $this->hasOne(Purchaser_quote::class,'quote_id','id');
-    }
+    
 }

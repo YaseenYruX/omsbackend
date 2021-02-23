@@ -19,8 +19,8 @@ class QuotesController extends Controller
         $perpage=!empty($_GET['perpage'])?intval($_GET['perpage']):20;
         $sortcol=!empty($_GET['sortcol'])?$_GET['sortcol']:'id';
         $sorttype=!empty($_GET['sorttype'])?$_GET['sorttype']:'desc';
-    	return Quotes::orderBy($sortcol,$sorttype)//->where('qoute_status','Open')
-        ->paginate($perpage);
+    	//return Quotes::orderBy($sortcol,$sorttype)->paginate($perpage);
+       return Purchaser_quote::with('quote')->where('purchaser_id',Auth::guard('api')->user()->id)->orderBy($sortcol,$sorttype)->paginate($perpage);
     }
 
     public function itemquote(Request $request,Quotes_item $quotes_item)
@@ -66,7 +66,8 @@ class QuotesController extends Controller
     }
     public function getquotes($id)
     {
-        $quotes=Quotes::with('items','items.prices','lead','lead.sales','items.brands','items.condition')->findOrFail($id);
+        //$quotes=Quotes::with('items','items.prices','lead','lead.sales','items.brands','items.condition')->findOrFail($id);
+        $quotes=Purchaser_quote::with('quote','quote.items','quote.lead','quote.lead.sales','quote.items.brands','quote.items.condition')->findOrFail($id);
         return $quotes;
     }
 

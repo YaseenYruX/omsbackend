@@ -38,7 +38,7 @@ class QuotesController extends Controller
         $quotes->quote_status=$request->quote_status;
     	if($quotes->save())
         {
-            $user = User::where('user_type',4)->get();
+            $user = User::where('user_type',3)->get();
             foreach ($user as $users) 
             {
                 $purchaser_quote = new Purchaser_quote;
