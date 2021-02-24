@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Api\Admin\LeadController as AdminLeadController;
 use App\Http\Controllers\Api\Sales\LeadController as SalesLeadController;
 use App\Http\Controllers\Api\Sales\QuotesController as SalesQuotesController;
+use App\Http\Controllers\Api\BUH\QuotesController as BUHQuoteController;
 
 /*cu in routes mean it's for create and update*/
 
@@ -42,7 +43,7 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 		});
 	});
 	Route::name('buh.')->prefix('buh')->middleware('buh')->group(function () {
-		
+		Route::get('/quote/{quote}', [BUHQuoteController::class, 'get'])->name('quote.detail');
 	});
 	Route::name('sales.')->prefix('sales')->middleware('sales')->group(function () {
 

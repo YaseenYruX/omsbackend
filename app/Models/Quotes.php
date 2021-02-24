@@ -19,7 +19,9 @@ class Quotes extends Model
         'email',
         'qoute_status',
     ];
-
+    public function purchaserquotes(){
+        return $this->hasMany(Purchaser_quote::class,'quote_id','id');
+    }
     public function items()
     {
         return $this->hasMany(Quotes_item::class,'quote_id','id');
