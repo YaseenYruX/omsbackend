@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quotes;
 use App\Models\UserBrands;
+use App\Models\Brands;
 use Auth;
 class QuotesController extends Controller
 {
@@ -19,5 +20,18 @@ class QuotesController extends Controller
             )->find($quote->id);
         }
         return response()->json(['status'=>0,'data'=>'Quote does not belong to you']);
+    }
+
+    public function brandquote(Request $request, Brands $brand)
+    {
+        if($brand->id)
+        {
+            $quotes = Quotes::where('brand_id',$brand->id)->paginate(20);
+        }
+        else
+        {
+            $quotes = Quotes::paginate(20);
+        }
+        return $quotes;
     }
 }

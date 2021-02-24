@@ -44,6 +44,7 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 	});
 	Route::name('buh.')->prefix('buh')->middleware('buh')->group(function () {
 		Route::get('/quote/{quote}', [BUHQuoteController::class, 'get'])->name('quote.detail');
+		Route::get('/quote_brand/{brand}', [BUHQuoteController::class,'brandquote'])->name('brandquote');
 	});
 	Route::name('sales.')->prefix('sales')->middleware('sales')->group(function () {
 
