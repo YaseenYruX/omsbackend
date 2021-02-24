@@ -26,6 +26,10 @@ Route::name('authenticate.')->prefix('auth')->middleware('cors')->group(function
 /*login route end*/
 /*authenticated routes*/
 Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(function () {
+	Route::get('/my-brands', function(Request $req){
+		$data=\App\Models\User::where('id',$req->user()->id)->with('userbrands','userbrands.brand')->first();
+		return response()->json($data->userbrands);
+	})->name('mybrands');
 	Route::name('admin.')->prefix('admin')->middleware('admin')->group(function () {
 		Route::get('/users', [AdminUserController::class, 'index'])->name('users');
 		Route::get('/user/{user}', [AdminUserController::class, 'get'])->name('user.get');

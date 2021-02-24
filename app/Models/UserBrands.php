@@ -15,4 +15,8 @@ class UserBrands extends Model
     {
     	return $this->hasOne(Brands::class,'id','brand_id');
     }
+    public function brand()
+    {
+    	return $this->BelongsTo(Brands::class,'brand_id');
+    }
 }
