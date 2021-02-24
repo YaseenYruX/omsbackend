@@ -11,6 +11,7 @@ class QuotesController extends Controller
         $brandcheck=$req->user()->userbrands()->where('brand_id',$quote->brand_id)->first();
         if($brandcheck){
             return Quotes::with('items','items.condition','items.brands',
+            'purchaserquotes.purchaser',
             'purchaserquotes.quoteitems.brands',
             'purchaserquotes.quoteitems.condition',
             'purchaserquotes.quoteitems.prices.brand',
