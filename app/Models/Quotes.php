@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Quotes_item;
 use App\Models\Lead;
 use App\Models\Purchaser_quote;
+use App\Models\Brands;
 
 class Quotes extends Model
 {
@@ -27,5 +28,8 @@ class Quotes extends Model
     {
         return $this->hasOne(Lead::class,'id','lead_id');
     }
-    
+    public function quote_brand()
+    {
+        return $this->hasOne(Brands::class,'id','brand_id');
+    }
 }

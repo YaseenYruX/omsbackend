@@ -19,7 +19,7 @@ class Quotes_item extends Model
     }
     public function brands()
     {
-    	return $this->hasOne(Brands::class,'id','brand');
+    	return $this->hasOne(M_flag::class,'id','brand');
     }
     public function condition()
     {

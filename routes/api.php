@@ -49,6 +49,8 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 			Route::post('/create-update/{quotes?}', [SalesQuotesController::class, 'create_or_update'])->name('createupdate');
 			Route::get('/delete/{quotes}', [SalesQuotesController::class, 'delete'])->name('delete');
 			Route::get('/get/{quotes}', [SalesQuotesController::class, 'get'])->name('get');
+			Route::get('/brands', [SalesQuotesController::class, 'getbrands'])->name('brands');
+			Route::get('/itembrand', [SalesQuotesController::class, 'getitembrand'])->name('brands');
 		});
 		/* sales quotes handlong end*/
 
@@ -69,10 +71,12 @@ Route::name('auth.')->prefix('auth')->middleware(['cors','auth:api'])->group(fun
 		Route::name('quotes.')->prefix('quotes')->middleware('cors')->group(function () {
 			Route::get('/unanswered', [PurchaserQuotesController::class, 'unanswered'])->name('unanswered');
 			Route::post('/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'itemquote'])->name('itemquote');
-			Route::post('/multi/giveprice/{quotes_item}', [PurchaserQuotesController::class, 'multiitemquote'])->name('itemquote');
+			Route::post('/multi/giveprice/{purchaser_quote}/{quotes_item}', [PurchaserQuotesController::class, 'multiitemquote'])->name('itemquote');
 			Route::get('/get/{quotes}', [PurchaserQuotesController::class, 'getquotes'])->name('get');
 			Route::get('/brands', [PurchaserQuotesController::class, 'getbrands'])->name('brands');
 			Route::get('/conditions', [PurchaserQuotesController::class, 'conditions'])->name('conditions');
+			Route::get('/itembrand', [PurchaserQuotesController::class, 'getitembrand'])->name('brands');
+			Route::post('/answered/{purchaser_quote}', [PurchaserQuotesController::class, 'answered'])->name('answered');
 		});
 	});
 

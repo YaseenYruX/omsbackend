@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\Sales;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Lead;
+use App\Models\UserBrands;
 use App\Models\Brands;
 use Auth;
 
@@ -16,7 +17,7 @@ class LeadController extends Controller
     	$perpage=!empty($_GET['perpage'])?intval($_GET['perpage']):20;
         $sortcol=!empty($_GET['sortcol'])?$_GET['sortcol']:'id';
         $sorttype=!empty($_GET['sorttype'])?$_GET['sorttype']:'desc';
-        return Lead::where('assigned_id',Auth::guard('api')->user()->id)->orderBy($sortcol,$sorttype)->paginate($perpage);
+        return Lead::with('lead_brand')->where('assigned_id',Auth::guard('api')->user()->id)->orderBy($sortcol,$sorttype)->paginate($perpage);
     }
      public function create_or_update(Request $request,Lead $lead){
 
@@ -82,7 +83,11 @@ class LeadController extends Controller
 
     public function getbrands()
     {
-    	$brands = Brands::get();
-    	return $brands;
+        $brandids= UserBrands::with('brand_get')->where('user_id',Auth::guard('api')->user()->id)->get();
+        foreach ($brandids as $key => $value) 
+        {
+          $brand[$key] = $value->brand_get;
+        }
+    	return $brand;
     }
 }
